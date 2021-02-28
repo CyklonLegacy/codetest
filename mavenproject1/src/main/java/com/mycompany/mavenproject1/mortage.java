@@ -53,7 +53,7 @@ public class mortage {
     double numerator = 0;
 
     //Using BufferedReader and StandardCharsets.UTF_8 to allow characters like é and å to display
-    try (BufferedReader br = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 
             try {
                 while ((line = br.readLine()) != null) // returns a Boolean value
@@ -65,8 +65,7 @@ public class mortage {
                         }
                         
                     // use comma and allows "ClarencÃ©,Andersson" to be injected into only one position in the array
-                  //  String[] customers = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1); 
-                     String[] customers = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1); 
+                     String[] customers = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"); 
                     
                     Matcher m = p.matcher(customers[0]);
                     boolean b = m.matches();
@@ -101,6 +100,7 @@ public class mortage {
                         //This pluses after each line in the file has been read
                         i++;
                         
+                        //This prints row for row the values from the file aswell as the monthly payment total
                         System.out.println(
                                 "Prospect "+ i +": "+ customers[0] + " wants to borrow " + customers[1] + "€ for a period of "
                                         + customers[3] + " years and pay " + df2.format(MonthlyPayment) + "€ each month");
